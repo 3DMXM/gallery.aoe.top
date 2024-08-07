@@ -1,27 +1,25 @@
 {
-  "name": "vuetify-project",
-  "version": "0.0.0",
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "build": "nuxt build",
+    "dev": "nuxt dev --dotenv .env",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@mdi/font": "7.4.47",
-    "roboto-fontface": "*",
-    "vue": "^3.4.31",
-    "vuetify": "^3.6.11"
+    "@mdi/font": "^7.4.47",
+    "axios": "^1.7.3",
+    "nuxt": "^3.12.4",
+    "vite-plugin-vuetify": "^2.0.4",
+    "vue": "latest",
+    "vuetify": "^3.6.14"
   },
+  "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72",
   "devDependencies": {
-    "@babel/types": "^7.24.7",
-    "@types/node": "^20.14.10",
-    "@vitejs/plugin-vue": "^5.0.5",
-    "sass": "1.77.6",
-    "typescript": "^5.4.2",
-    "unplugin-fonts": "^1.1.1",
-    "unplugin-vue-components": "^0.27.2",
-    "vite": "^5.3.3",
-    "vite-plugin-vuetify": "^2.0.3",
-    "vue-tsc": "^2.0.26"
+    "@pinia/nuxt": "^0.5.3",
+    "less": "^4.2.0"
   }
 }
