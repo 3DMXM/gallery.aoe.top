@@ -1,4 +1,6 @@
-
+interface Env {
+    gallery: any;
+}
 
 export class Config {
     public static token = {
@@ -14,4 +16,8 @@ export class Config {
     }
 
     public static onedriveRoot = "/Gallery"                     // OneDrive 的根目录
+
+    // public static accessToken() {
+
+    // }
 }

@@ -20,8 +20,8 @@ export default defineEventHandler(async (event: any) => {
         return {
             code: '99',
             message: '获取列表失败',
-            a: Config.token,
-            data
+            // a: Config.token,
+            // data
         }
     }
 })
