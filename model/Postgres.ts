@@ -11,7 +11,7 @@ export class Postgres {
      * @returns 
      */
     public static async Get(tableName: string, where: string, select = '*') {
-        return await sql`SELECT ${select} FROM ${tableName} WHERE ${where}`
+        return await sql`SELECT ${select} FROM ${tableName} WHERE ${where};`
     }
 
     /**
@@ -23,7 +23,7 @@ export class Postgres {
     public static async Insert(tableName: string, data: any) {
         let keys = Object.keys(data)
         let values = Object.values(data)
-        let sqlStr = `INSERT INTO ${tableName} (${keys.join(',')}) VALUES (${values.map((item: any) => `'${item}'`).join(',')})`
+        let sqlStr = `INSERT INTO ${tableName} (${keys.join(',')}) VALUES (${values.map((item: any) => `'${item}'`).join(',')});`
         return await sql`${sqlStr}`
     }
 
@@ -37,7 +37,7 @@ export class Postgres {
     public static async Update(tableName: string, data: any, where: string) {
         let keys = Object.keys(data)
         let values = Object.values(data)
-        let sqlStr = `UPDATE ${tableName} SET ${keys.map((item, index) => `${item}='${values[index]}'`).join(',')} WHERE ${where}`
+        let sqlStr = `UPDATE ${tableName} SET ${keys.map((item, index) => `${item}='${values[index]}'`).join(',')} WHERE ${where};`
         return await sql`${sqlStr}`
     }
 
@@ -48,7 +48,7 @@ export class Postgres {
      * @returns 
      */
     public static async Delete(tableName: string, where: string) {
-        return await sql`DELETE FROM ${tableName} WHERE ${where}`
+        return await sql`DELETE FROM ${tableName} WHERE ${where};`
     }
 
     /**
