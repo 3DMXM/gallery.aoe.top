@@ -1,9 +1,8 @@
 
-import axios from 'axios'
+import request from 'request';
+import { Config } from './Config'
 
-import { Config, token } from './Config'
-
-// const { token } = Config
+const { token } = Config
 
 export class OneDrive {
 
@@ -54,27 +53,68 @@ export class OneDrive {
      */
     public async GetAccessToken(refreshToken: string) {
 
-        const url = "https://login.microsoftonline.com/common/oauth2/token";
+        // const url = "https://login.microsoftonline.com/common/oauth2/token";
 
-        let res = await fetch(url, {
+        // let res = await fetch(url, {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/x-www-form-urlencoded"
+        //     },
+        //     body: new URLSearchParams({
+        //         grant_type: "refresh_token",
+        //         client_id: token.clientId,
+        //         client_secret: token.clientSecret,
+        //         refresh_token: refreshToken,
+        //         redirect_uri: token.redirectUri,
+        //     })
+        // })
+
+        // let data = await res.json()
+
+
+
+        // const { data } = await axios.post('https://login.microsoftonline.com/common/oauth2/token', new URLSearchParams({
+        //     grant_type: "refresh_token",
+        //     client_id: token.clientId,
+        //     client_secret: token.clientSecret,
+        //     refresh_token: refreshToken,
+        //     redirect_uri: token.redirectUri
+        // }), {
+        //     headers: {
+        //         "Content-Type": "application/x-www-form-urlencoded"
+        //     },
+
+        // })
+
+
+        // token.accessToken = data.access_token
+        // token.expires_on = data.expires_on
+
+        // return data.data
+        const url = "https://login.microsoftonline.com/common/oauth2/token";
+        const options = {
             method: "POST",
+            url: url,
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             },
-            body: new URLSearchParams({
+            form: {
                 grant_type: "refresh_token",
                 client_id: token.clientId,
                 client_secret: token.clientSecret,
                 refresh_token: refreshToken,
                 redirect_uri: token.redirectUri,
-            })
+            }
+        };
+
+        request.post(options, (err, response, body) => {
+            if (!err) {
+                let jsonData = JSON.parse(body);
+                token.accessToken = jsonData.access_token;
+                token.expires_on = jsonData.expires_on
+            }
         })
 
-        let data = await res.json()
-        token.accessToken = data.access_token
-        token.expires_on = data.expires_on
-
-        return data
     }
 
     /**

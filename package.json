@@ -13,6 +13,7 @@
     "@mdi/font": "^7.4.47",
     "axios": "^1.7.3",
     "nuxt": "^3.12.4",
+    "request": "^2.88.2",
     "vite-plugin-vuetify": "^2.0.4",
     "vue": "latest",
     "vuetify": "^3.6.14"
@@ -20,6 +21,7 @@
   "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72",
   "devDependencies": {
     "@pinia/nuxt": "^0.5.3",
+    "@types/request": "^2.48.12",
     "less": "^4.2.0"
   }
 }
