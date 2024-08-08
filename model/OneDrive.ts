@@ -110,6 +110,8 @@ export class OneDrive {
         request.post(options, (err, response, body) => {
             if (!err) {
                 let jsonData = JSON.parse(body);
+                console.log("Token", jsonData);
+
                 token.accessToken = jsonData.access_token;
                 token.expires_on = jsonData.expires_on
             }
