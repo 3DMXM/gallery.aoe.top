@@ -5,7 +5,7 @@ export default defineEventHandler(async (event: any) => {
 
 
     if (type == 'GET') {
-        let { rows } = await Postgres.Get('like', `id='${id}'`)
+        let { rows } = await Postgres.Get('like', `id=${id}`)
 
         if (rows.length = 0) {
             rows = (await Postgres.Insert('like', { id: id, count: 0 })).rows
@@ -17,16 +17,16 @@ export default defineEventHandler(async (event: any) => {
         }
     } else if (type == "ADD") {
 
-        let { rows } = await Postgres.Get('like', `id='${id}'`)
+        let { rows } = await Postgres.Get('like', `id=${id}`)
 
         if (rows.length == 0) {
             let time = new Date().getTime();
             await Postgres.Insert('like', { id: id, count: 1, time: time })
         } else {
             let count = rows[0].count + 1
-            await Postgres.Update('like', { count: count }, `id='${id}'`)
+            await Postgres.Update('like', { count: count }, `id=${id}`)
         }
-        rows = (await Postgres.Get('like', `id='${id}'`)).rows
+        rows = (await Postgres.Get('like', `id=${id}`)).rows
 
         return {
             code: "00",
