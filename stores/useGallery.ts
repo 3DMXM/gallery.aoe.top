@@ -30,6 +30,14 @@ export const useGallery = defineStore('Gallery', {
             if (data.code == '00') {
                 this.galleryList = data.data
             }
+        },
+        async GetLike(id: string) {
+            let { data } = await axios.post('/api/Like', { id, type: 'GET' })
+            return data
+        },
+        async AddLike(id:string){
+            let { data } = await axios.post('/api/Like', { id, type: 'ADD' })
+            return data
         }
     }
 })

@@ -18,11 +18,30 @@ const time = computed(() => {
     return props.item.lastModifiedDateTime.replace('T', ' ').replace('Z', '')
 })
 
+
+const like = ref(0)
+
+
+gallery.GetLike(props.item.id).then(({ data }) => {
+    console.log(data);
+    like.value = data.count
+})
+
+
+
+
 function show() {
     gallery.show = true
     // gallery.window = props.item.id
     // gallery.window = item 在 gallery.galleryList 中的索引
     gallery.window = gallery.galleryList.findIndex((item) => item.id === props.item.id)
+}
+
+async function add_like() {
+    let { data } = await gallery.AddLike(props.item.id)
+    console.log(data);
+
+    like.value = data.count
 }
 
 </script>
@@ -36,6 +55,9 @@ function show() {
                 <div>作者: {{ author }}</div>
                 <div>日期: {{ time }}</div>
             </v-card-text>
+            <v-card-actions class="actions">
+                <v-btn variant="text" append-icon="mdi-heart-outline" @ckicl="add_like">{{ like }}</v-btn>
+            </v-card-actions>
         </v-card>
 
     </v-col>
