@@ -19,13 +19,13 @@ const time = computed(() => {
 })
 
 
-const like = ref(0)
+// const like = ref(0)
 
 
-gallery.GetLike(props.item.id).then(({ data }) => {
-    console.log(data);
-    like.value = data.count
-})
+// gallery.GetLike(props.item.id).then(({ data }) => {
+//     console.log(data);
+//     like.value = data.count
+// })
 
 
 
@@ -37,12 +37,12 @@ function show() {
     gallery.window = gallery.galleryList.findIndex((item) => item.id === props.item.id)
 }
 
-async function add_like() {
-    let { data } = await gallery.AddLike(props.item.id)
-    console.log(data);
+// async function add_like() {
+//     let { data } = await gallery.AddLike(props.item.id)
+//     console.log(data);
 
-    like.value = data.count
-}
+//     like.value = data.count
+// }
 
 </script>
 <template>
@@ -55,9 +55,9 @@ async function add_like() {
                 <div>作者: {{ author }}</div>
                 <div>日期: {{ time }}</div>
             </v-card-text>
-            <v-card-actions class="actions">
+            <!-- <v-card-actions class="actions">
                 <v-btn variant="text" append-icon="mdi-heart-outline" @ckicl="add_like">{{ like }}</v-btn>
-            </v-card-actions>
+            </v-card-actions> -->
         </v-card>
 
     </v-col>
