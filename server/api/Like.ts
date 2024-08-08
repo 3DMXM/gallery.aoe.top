@@ -1,14 +1,18 @@
 import { Postgres } from '~/model/Postgres'
 
+import { sql } from "@vercel/postgres";
+
+
 export default defineEventHandler(async (event: any) => {
     let { id, type } = await readBody(event)
 
 
     if (type == 'GET') {
-        let { rows } = await Postgres.Get('like', `id=${id}`)
+        let { rows } = await sql`SELECT * FROM like WHERE id=${id};`
 
         if (rows.length = 0) {
-            rows = (await Postgres.Insert('like', { id: id, count: 0 })).rows
+            // rows = (await Postgres.Insert('like', { id: id, count: 0 })).rows
+            rows = (await sql`INSERT INTO like (id, count) VALUES (${id}, 0) RETURNING *;`).rows
         }
 
         return {
@@ -17,16 +21,19 @@ export default defineEventHandler(async (event: any) => {
         }
     } else if (type == "ADD") {
 
-        let { rows } = await Postgres.Get('like', `id=${id}`)
+        // let { rows } = await Postgres.Get('like', `id=${id}`)
+        let { rows } = await sql`SELECT * FROM like WHERE id=${id};`
 
         if (rows.length == 0) {
-            let time = new Date().getTime();
-            await Postgres.Insert('like', { id: id, count: 1, time: time })
+            // await Postgres.Insert('like', { id: id, count: 1 })
+            rows = (await sql`INSERT INTO like (id, count) VALUES (${id}, 1);`).rows
         } else {
             let count = rows[0].count + 1
-            await Postgres.Update('like', { count: count }, `id=${id}`)
+            // await Postgres.Update('like', { count: count }, `id=${id}`)
+            rows = (await sql`UPDATE like SET count=${count} WHERE id=${id} RETURNING *;`).rows
         }
-        rows = (await Postgres.Get('like', `id=${id}`)).rows
+        // rows = (await Postgres.Get('like', `id=${id}`)).rows
+
 
         return {
             code: "00",
