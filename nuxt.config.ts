@@ -28,4 +28,5 @@ export default defineNuxtConfig({
             refreshToken: process?.env?.refreshToken || '',
         },
     },
+    ssr: false
 })

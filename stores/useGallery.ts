@@ -13,7 +13,7 @@ export const useGallery = defineStore('Gallery', {
         async GetUserList() {
             let { data } = await axios.post('/api/GetItem', { path: [''] })
 
-            if (data.code == '00') {
+            if (data?.code == '00') {
                 this.userList = data.data.map((item: any) => {
                     // item.name = 1.饮月
                     // name = 饮月
