@@ -1,7 +1,7 @@
 <script lang='ts' setup>
 
 useHead({
-    title: "小莫&饮月の画廊",
+    title: "饮月の画廊",
     link: [
         {
             rel: 'icon',
@@ -11,11 +11,11 @@ useHead({
     meta: [
         {
             name: 'keywords',
-            content: '小莫,饮月,画廊,二次元,图片'
+            content: '饮月,画廊,二次元,图片'
         },
         {
             name: 'description',
-            content: '小莫&饮月の画廊'
+            content: '饮月の画廊'
         }
     ]
 })
