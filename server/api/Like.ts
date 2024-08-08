@@ -8,7 +8,7 @@ export default defineEventHandler(async (event: any) => {
 
 
     if (type == 'GET') {
-        let { rows } = await sql`SELECT * FROM like WHERE id=${id};`
+        let { rows } = await sql`SELECT * FROM like WHERE id = ${id};`
 
         if (rows.length = 0) {
             // rows = (await Postgres.Insert('like', { id: id, count: 0 })).rows
