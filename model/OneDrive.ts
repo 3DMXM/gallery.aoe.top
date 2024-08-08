@@ -1,15 +1,15 @@
 
 import axios from 'axios'
 
-import { Config } from './Config'
+import { Config, token } from './Config'
 
-const { token } = Config
+// const { token } = Config
 
 export class OneDrive {
 
     // 初始化
     constructor() {
-        let token = Config.token
+        // let token = Config.token
 
         let time = new Date().getTime();
         let expires_on = token.expires_on * 1000;
@@ -71,8 +71,8 @@ export class OneDrive {
         })
 
         let data = await res.json()
-        Config.token.accessToken = data.access_token
-        Config.token.expires_on = data.expires_on
+        token.accessToken = data.access_token
+        token.expires_on = data.expires_on
 
         return data
     }
